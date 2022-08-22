@@ -1,22 +1,20 @@
-import React, {useState, useEffect} from 'react';
-import {View, FlatList, Text} from 'react-native';
-import axios from 'axios';
+import React from 'react';
+import {View, FlatList, ActivityIndicator, Text} from 'react-native';
 import ProductCard from '../../components/ProductCard';
+import useFetch from '../../hooks/useFetch';
 
 const Products = () => {
-  const [data, setData] = useState([]);
-  // const renderProduct = ({item}) => null;
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    const {data: productData} = await axios.get(process.env.API_URL);
-    setData(productData);
-  };
+  const {loading, data, error} = useFetch(process.env.API_URL);
 
   const renderProduct = ({item}) => <ProductCard product={item} />;
+
+  if (loading) {
+    return <ActivityIndicator size="large" />;
+  }
+
+  if (error) {
+    return <Text>{error}</Text>;
+  }
 
   return (
     <View>
