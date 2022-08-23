@@ -4,10 +4,14 @@ import useFetch from '../../hooks/useFetch';
 import CategoryCard from '../../components/CategoryCard';
 import styles from './Categories.style';
 
-const Categories = () => {
+const Categories = ({navigation}) => {
   const {data, loading, error} = useFetch(
     'https://www.themealdb.com/api/json/v1/1/categories.php',
   );
+
+  const handleClick = meal => {
+    navigation.navigate('Meals', {meal});
+  };
 
   if (loading) {
     return <Text>Loading</Text>;
@@ -17,7 +21,12 @@ const Categories = () => {
     return <Text>Error</Text>;
   }
 
-  const renderCategories = ({item}) => <CategoryCard category={item} />;
+  const renderCategories = ({item}) => (
+    <CategoryCard
+      category={item}
+      onSelect={() => handleClick(item.strCategory)}
+    />
+  );
 
   return (
     <View style={styles.container}>
