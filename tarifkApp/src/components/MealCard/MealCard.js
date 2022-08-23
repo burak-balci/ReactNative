@@ -2,9 +2,9 @@ import React from 'react';
 import {View, Text, Image, TouchableWithoutFeedback} from 'react-native';
 import styles from './MealCard.style';
 
-const MealCard = ({meal}) => {
+const MealCard = ({meal, onSelect}) => {
   return (
-    <TouchableWithoutFeedback>
+    <TouchableWithoutFeedback onPress={onSelect}>
       <View style={styles.container}>
         <Image
           source={{

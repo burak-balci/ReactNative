@@ -19,8 +19,24 @@ const App = () => {
           name="Categories"
           component={Categories}
         />
-        <Stack.Screen name="Detail" component={Detail} />
-        <Stack.Screen name="Meals" component={Meals} />
+        <Stack.Screen
+          options={{
+            headerTitleStyle: {color: '#FFA500'},
+            headerTitleAlign: 'center',
+            headerTintColor: '#FFA500',
+          }}
+          name="Detail"
+          component={Detail}
+        />
+        <Stack.Screen
+          options={{
+            headerTitleStyle: {color: '#FFA500'},
+            headerTitleAlign: 'center',
+            headerTintColor: '#FFA500',
+          }}
+          name="Meals"
+          component={Meals}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
