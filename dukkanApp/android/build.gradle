@@ -1,13 +1,6 @@
 import org.apache.tools.ant.taskdefs.condition.Os
-apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-project.ext.envConfigFiles = [
-  release: ".env.production",
-  dev: ".env.development",
-// Also you can different types of environments,
-  // for example staging.
-  stage: ".env.staging",
-];
 
 buildscript {
     ext {
@@ -32,8 +25,6 @@ buildscript {
         classpath("com.android.tools.build:gradle:7.1.1")
         classpath("com.facebook.react:react-native-gradle-plugin")
         classpath("de.undercouch:gradle-download-task:5.0.1")
-        implementation "com.facebook.react:react-native:+"
-        implementation project(':react-native-config')
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
