@@ -11,7 +11,14 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Categories" component={Categories} />
+        <Stack.Screen
+          options={{
+            headerTitleStyle: {color: '#FFA500'},
+            headerTitleAlign: 'center',
+          }}
+          name="Categories"
+          component={Categories}
+        />
         <Stack.Screen name="Detail" component={Detail} />
         <Stack.Screen name="Meals" component={Meals} />
       </Stack.Navigator>
