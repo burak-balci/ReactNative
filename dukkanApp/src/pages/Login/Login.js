@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Image} from 'react-native';
+import {View, Image} from 'react-native';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import styles from './Login.style';
@@ -29,12 +29,15 @@ const Login = () => {
             <Input
               placeholder="Kullanıcı adını giriniz."
               value={values.username}
-              onType={handleChange('username')}
+              onType={handleChange('abacus')}
+              IconName="account"
             />
             <Input
               placeholder="Kullanıcı şifrenizi giriniz."
               value={values.password}
               onType={handleChange('password')}
+              IconName="key"
+              isSecure
             />
             <Button onPress={handleSubmit} text="Giriş Yap" />
           </View>
