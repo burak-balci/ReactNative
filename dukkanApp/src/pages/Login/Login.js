@@ -5,9 +5,11 @@ import Input from '../../components/Input';
 import styles from './Login.style';
 import {Formik} from 'formik';
 import usePost from '../../hooks/usePost';
+import {useDispatch} from 'react-redux';
 
 const Login = ({navigation}) => {
   const {data, post, loading, error} = usePost();
+  const dispatch = useDispatch();
 
   const handleLogin = values => {
     post(`${process.env.API_AUTH_URL}/login`, values);
@@ -21,7 +23,7 @@ const Login = ({navigation}) => {
     if (data.status === 'Error') {
       Alert.alert('Dükkan', 'Kullanıcı bulunamadı');
     } else {
-      navigation.navigate('ProductsPage');
+      dispatch({type: 'SET_USER', payload: {user: data}});
     }
   }
 
