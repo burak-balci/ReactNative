@@ -10,7 +10,7 @@ const JobsPage = ({navigation}) => {
   );
 
   const handleProductSelect = id => {
-    navigation.navigate('JobDetail', {id});
+    navigation.navigate('JobDetail', {id, data});
   };
 
   const renderJobs = ({item}) => (
