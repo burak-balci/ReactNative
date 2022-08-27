@@ -1,10 +1,24 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, FlatList} from 'react-native';
+import {useSelector} from 'react-redux';
+import FavoriteJobsCard from '../../components/FavoriteJobsCard';
+import {useDispatch} from 'react-redux';
 
 const FavoritedJobsPage = () => {
+  const favoriteJob = useSelector(s => s.favoriteJob);
+  const dispatch = useDispatch();
+
+  const handleRemove = item => {
+    dispatch({type: 'REMOVE_FAVORITE', payload: {item}});
+  };
+
+  const renderFavoritedJobs = ({item}) => (
+    <FavoriteJobsCard onClick={handleRemove} jobs={item} />
+  );
+
   return (
     <View>
-      <Text>FavoritedJobsPage</Text>
+      <FlatList data={favoriteJob} renderItem={renderFavoritedJobs} />
     </View>
   );
 };

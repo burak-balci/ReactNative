@@ -8,16 +8,22 @@ import {
 } from 'react-native';
 import RenderHTML from 'react-native-render-html';
 import styles from './JobDetail.style';
+import {useDispatch} from 'react-redux';
 
 const JobDetail = ({route}) => {
   const {id, data} = route.params;
   const filtered = data.results.filter(item => item.id === id);
+  const dispatch = useDispatch();
 
   const source = {
     html: filtered[0].contents,
   };
 
   const {width} = useWindowDimensions();
+
+  const handleClick = favoriteJob => {
+    dispatch({type: 'ADD_FAVORITE', payload: {favoriteJob}});
+  };
 
   return (
     <View style={styles.container}>
@@ -42,7 +48,9 @@ const JobDetail = ({route}) => {
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Submit</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          onPress={() => handleClick(filtered)}
+          style={styles.button}>
           <Text style={styles.buttonText}>Favorite Job</Text>
         </TouchableOpacity>
       </View>
