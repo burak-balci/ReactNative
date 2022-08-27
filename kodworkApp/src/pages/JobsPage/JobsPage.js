@@ -1,10 +1,20 @@
-import React from 'react';
-import {View, Text} from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, FlatList} from 'react-native';
 import useFetch from '../../hooks/useFetch';
+import JobsCard from '../../components/JobsCard';
 
-const JobsPage = () => {
+const JobsPage = ({navigation}) => {
+  const [page, setPage] = useState(1);
   const {loading, data, error} = useFetch(
-    'https://www.themuse.com/api/public/jobs?page=1',
+    `https://www.themuse.com/api/public/jobs?page=${page}`,
+  );
+
+  const handleProductSelect = id => {
+    navigation.navigate('JobDetail', {id});
+  };
+
+  const renderJobs = ({item}) => (
+    <JobsCard jobs={item} onSelect={() => handleProductSelect(item.id)} />
   );
 
   if (loading) {
@@ -25,7 +35,7 @@ const JobsPage = () => {
 
   return (
     <View>
-      <Text>JobsPage</Text>
+      <FlatList data={data.results} renderItem={renderJobs} />
     </View>
   );
 };
