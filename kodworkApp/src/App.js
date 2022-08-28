@@ -1,5 +1,4 @@
 import React from 'react';
-import {View, Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomePage from './pages/HomePage';
@@ -19,7 +18,11 @@ const App = () => {
             options={{headerShown: false}}
           />
           <Stack.Screen
-            options={{headerTitle: 'Implementation Consultant'}}
+            options={{
+              headerTitle: 'Implementation Consultant',
+              headerTitleStyle: {color: '#EF5350'},
+              headerTintColor: '#EF5350',
+            }}
             name="JobDetail"
             component={JobDetail}
           />

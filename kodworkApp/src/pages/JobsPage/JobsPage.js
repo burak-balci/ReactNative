@@ -1,7 +1,10 @@
 import React, {useState} from 'react';
-import {View, Text, FlatList} from 'react-native';
+import {View, Text, FlatList, TouchableOpacity} from 'react-native';
 import useFetch from '../../hooks/useFetch';
 import JobsCard from '../../components/JobsCard';
+import Loading from '../../components/Loading';
+import Error from '../../components/Error';
+import styles from './JobsPage.style';
 
 const JobsPage = ({navigation}) => {
   const [page, setPage] = useState(1);
@@ -17,25 +20,41 @@ const JobsPage = ({navigation}) => {
     <JobsCard jobs={item} onSelect={() => handleProductSelect(item.id)} />
   );
 
+  const handleClick = type => {
+    switch (type) {
+      case 'increase':
+        return setPage(page + 1);
+      case 'decrease':
+        return setPage(page - 1);
+      default:
+        return page;
+    }
+  };
+
   if (loading) {
-    return (
-      <View>
-        <Text>Loading...</Text>
-      </View>
-    );
+    return <Loading />;
   }
 
   if (error) {
-    return (
-      <View>
-        <Text>Error</Text>
-      </View>
-    );
+    return <Error />;
   }
 
   return (
-    <View>
+    <View style={styles.container}>
       <FlatList data={data.results} renderItem={renderJobs} />
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          onPress={() => handleClick('decrease')}
+          disabled={page === 1}
+          style={styles.button}>
+          <Text style={styles.buttonText}>Previous Page</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => handleClick('increase')}
+          style={styles.button}>
+          <Text style={styles.buttonText}>Next Page</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

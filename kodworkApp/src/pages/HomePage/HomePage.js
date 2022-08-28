@@ -1,5 +1,4 @@
 import React from 'react';
-import {View, Text} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import JobsPage from '../JobsPage';
 import FavoritedJobsPage from '../FavoritedJobsPage';
@@ -10,7 +9,11 @@ const HomePage = () => {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        options={{headerTitle: 'Jobs'}}
+        options={{
+          headerTitle: 'Jobs',
+          headerTitleStyle: {color: '#EF5350'},
+          headerTitleAlign: 'center',
+        }}
         name="Jobs"
         component={JobsPage}
       />
